@@ -1,1 +1,29 @@
 FROM php:5.6-apache
+
+# System packages
+RUN apt-get update -qq  \
+ && apt-get install -y build-essential git-core libicu-dev libmemcached-dev libmemcached11 libmemcachedutil2 libz-dev vim-tiny ssh unzip \
+ && rm -rf /var/lib/apt/lists/* /var/cache/apk/*
+
+# Apache & PHP configuration
+RUN a2enmod rewrite \
+ && a2enmod ssl \
+ && a2dissite 000-default \
+ && echo ServerName localhost >> /etc/apache2/apache2.conf
+COPY config/vhost.conf /etc/apache2/sites-available/
+COPY config/php.ini /usr/local/etc/php/
+
+# PECL / extension builds and install
+RUN pecl install apcu-4.0.11 memcached-2.2.0 xdebug-2.5.5 \
+ && docker-php-ext-enable apcu memcached xdebug \
+ && docker-php-ext-install bcmath intl opcache pdo_mysql sockets
+
+# Enable remote debugging with xdebug
+RUN echo 'xdebug.remote_enable=on' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+ && echo 'xdebug.remote_connect_back=on' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+ && echo 'xdebug.remote_autostart=on' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Composer parallel install plugin
+RUN composer global require hirak/prestissimo
