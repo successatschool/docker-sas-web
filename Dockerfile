@@ -11,7 +11,7 @@ RUN a2enmod rewrite \
  && a2enmod ssl \
  && a2dissite 000-default \
  && a2ensite ssl \
- && echo ServerName localhost >> /etc/apache2/apache2.conf
+ && echo ServerName sas-local.webful.uk >> /etc/apache2/apache2.conf
 COPY config/php.ini /usr/local/etc/php/
 
 # PECL / extension builds and install
