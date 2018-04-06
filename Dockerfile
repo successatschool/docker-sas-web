@@ -9,6 +9,7 @@ RUN apt-get update -qq  \
 RUN a2enmod rewrite \
  && a2enmod ssl \
  && a2dissite 000-default \
+ && a2ensite ssl \
  && echo ServerName localhost >> /etc/apache2/apache2.conf
 COPY config/vhost.conf /etc/apache2/sites-available/
 COPY config/php.ini /usr/local/etc/php/
