@@ -17,7 +17,7 @@ COPY config/php.ini /usr/local/etc/php/
 # PECL / extension builds and install
 RUN pecl install apcu-4.0.11 memcached-2.2.0 xdebug-2.5.5 \
  && docker-php-ext-enable apcu memcached xdebug \
- && docker-php-ext-install bcmath gd intl opcache pdo_mysql sockets
+ && docker-php-ext-install bcmath gd intl opcache pcntl pdo_mysql sockets
 
 # Enable remote debugging with xdebug
 RUN echo 'xdebug.remote_enable=on' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
