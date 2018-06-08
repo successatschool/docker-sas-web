@@ -9,6 +9,7 @@ RUN apt-get update -qq  \
 COPY config/ssl.conf /etc/apache2/sites-available/
 RUN a2enmod rewrite \
  && a2enmod ssl \
+ && a2enmod headers \
  && a2dissite 000-default \
  && a2ensite ssl \
  && echo ServerName sas-local.webful.uk >> /etc/apache2/apache2.conf
