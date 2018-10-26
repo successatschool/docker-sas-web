@@ -14,16 +14,10 @@ RUN a2enmod rewrite \
  && a2ensite ssl \
  && echo ServerName sas-local.webful.uk >> /etc/apache2/apache2.conf
 
-# TODO make a version for prod with no xdebug
 # PECL / extension builds and install
-RUN pecl install apcu memcached xdebug \
- && docker-php-ext-enable apcu memcached xdebug \
+RUN pecl install apcu memcached \
+ && docker-php-ext-enable apcu memcached opcache \
  && docker-php-ext-install bcmath gd intl opcache pcntl pdo_mysql sockets
-
-# Enable remote debugging with xdebug
-RUN echo 'xdebug.remote_enable=on' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
- && echo 'xdebug.remote_connect_back=on' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
- && echo 'xdebug.remote_autostart=on' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # PHP configuration
 COPY config/php.ini /usr/local/etc/php/
