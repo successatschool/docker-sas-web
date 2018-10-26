@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:7.2-apache
 
 # System packages
 RUN apt-get update -qq  \
@@ -14,8 +14,9 @@ RUN a2enmod rewrite \
  && a2ensite ssl \
  && echo ServerName sas-local.webful.uk >> /etc/apache2/apache2.conf
 
+# TODO make a version for prod with no xdebug
 # PECL / extension builds and install
-RUN pecl install apcu-4.0.11 memcached-2.2.0 xdebug-2.5.5 \
+RUN pecl install apcu memcached xdebug \
  && docker-php-ext-enable apcu memcached xdebug \
  && docker-php-ext-install bcmath gd intl opcache pcntl pdo_mysql sockets
 
