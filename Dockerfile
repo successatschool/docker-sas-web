@@ -16,7 +16,7 @@ RUN a2enmod rewrite \
 
 # PECL / extension builds and install
 RUN pecl install apcu memcached \
- && docker-php-ext-enable apcu memcached opcache \
+ && docker-php-ext-enable apcu memcached \
  && docker-php-ext-install bcmath gd intl opcache pcntl pdo_mysql sockets
 
 # PHP configuration
