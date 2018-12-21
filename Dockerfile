@@ -2,7 +2,7 @@ FROM php:7.2-apache
 
 # System packages
 RUN apt-get update -qq  \
- && apt-get install -y build-essential cmake git-core libicu-dev libmemcached-dev libmemcached11 libmemcachedutil2 libpng-dev libz-dev vim-tiny ssh wget unzip \
+ && apt-get install -y build-essential cmake git-core libicu-dev libjpeg62-turbo-dev libmemcached-dev libmemcached11 libmemcachedutil2 libpng-dev libz-dev vim-tiny ssh wget unzip \
  && rm -rf /var/lib/apt/lists/* /var/cache/apk/*
 
 # Apache configuration
@@ -17,6 +17,7 @@ RUN a2enmod rewrite \
  && echo ServerName localhost >> /etc/apache2/apache2.conf
 
 # PECL / extension builds and install
+RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/
 RUN pecl install apcu \
  && docker-php-ext-enable apcu \
  && docker-php-ext-install bcmath gd intl opcache pcntl pdo_mysql sockets
