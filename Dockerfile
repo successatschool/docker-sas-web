@@ -9,9 +9,10 @@ RUN apt-get update -qq  \
 COPY config/ecs.conf /etc/apache2/sites-available/
 COPY config/ssl-local.conf /etc/apache2/sites-available/
 
-RUN a2enmod rewrite \
+RUN a2enmod headers \
+ && a2enmod remoteip \
+ && a2enmod rewrite \
  && a2enmod ssl \
- && a2enmod headers \
  && a2dissite 000-default \
  && a2ensite ssl-local \
  && echo ServerName localhost >> /etc/apache2/apache2.conf
