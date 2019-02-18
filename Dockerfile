@@ -16,11 +16,9 @@ RUN a2enmod rewrite \
  && a2ensite ssl-local \
  && echo ServerName localhost >> /etc/apache2/apache2.conf
 
-# PECL / extension builds and install
+# Extension config and install
 RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/
-RUN pecl install apcu \
- && docker-php-ext-enable apcu \
- && docker-php-ext-install bcmath gd intl opcache pcntl pdo_mysql sockets
+RUN docker-php-ext-install bcmath gd intl opcache pcntl pdo_mysql sockets
 
 # Manual build needed to get memcache extension support on PHP 7.2
 # See https://stackoverflow.com/a/48380759/2803757 and https://github.com/LeaseWeb/LswMemcacheBundle#requirements
