@@ -14,4 +14,4 @@ Remember to point your local config to the `:tmp-local` tag while testing.
 
 * Push to `master`, unless planning to use a new tag.
 * The [Docker Hub repository](https://cloud.docker.com/u/successatschool/repository/docker/successatschool/docker-sas-web/general)
-has an automated build from master on GitHub. Current tag is **successatschool/docker-sas-web:php7.2**.
+has an automated build from master on GitHub. Current tag is **successatschool/docker-sas-web:php7.3**.

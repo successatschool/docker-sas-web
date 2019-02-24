@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.3-apache
 
 # System packages
 RUN apt-get update -qq  \
@@ -21,17 +21,17 @@ RUN a2enmod headers \
 RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install bcmath gd intl opcache pcntl pdo_mysql sockets
 
-# Manual build needed to get memcache extension support on PHP 7.2
+# Manual build needed to get memcache extension support on PHP 7.x
 # See https://stackoverflow.com/a/48380759/2803757 and https://github.com/LeaseWeb/LswMemcacheBundle#requirements
 RUN cd /usr/local/src/ \
- && wget https://github.com/websupport-sk/pecl-memcache/archive/NON_BLOCKING_IO_php7.zip \
- && unzip NON_BLOCKING_IO_php7.zip \
- && mv pecl-memcache-NON_BLOCKING_IO_php7 pecl-memcache-NON_BLOCKING_IO_php72 \
- && cd pecl-memcache-NON_BLOCKING_IO_php72 \
+ && wget https://github.com/remicollet/pecl-memcache/archive/issue-php73.zip \
+ && unzip issue-php73.zip \
+ && mv pecl-memcache-issue-php73 pecl-memcache-php73 \
+ && cd pecl-memcache-php73 \
  && phpize \
  && ./configure --enable-memcache \
  && make \
- && cp modules/memcache.so /usr/local/lib/php/extensions/no-debug-non-zts-20170718 \
+ && cp modules/memcache.so /usr/local/lib/php/extensions/no-debug-non-zts-20180731 \
  && echo 'extension=memcache.so' > /usr/local/etc/php/conf.d/docker-php-ext-manual-memcache.ini
 
 # PHP configuration
