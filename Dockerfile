@@ -1,8 +1,12 @@
 FROM php:7.4-apache
 
-# System packages
+# System packages inc. Node + npm
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+	&& curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+	&& echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
 RUN apt-get update -qq  \
- && apt-get install -y build-essential cmake git-core libicu-dev libjpeg62-turbo-dev libmemcached-dev libmemcached11 libmemcachedutil2 libpng-dev libz-dev vim-tiny ssh wget unzip \
+ && apt-get install -y build-essential cmake git-core libicu-dev libjpeg62-turbo-dev libmemcached-dev libmemcached11 libmemcachedutil2 libpng-dev libz-dev nodejs ssh vim-tiny wget unzip \
  && rm -rf /var/lib/apt/lists/* /var/cache/apk/*
 
 # Apache configuration
