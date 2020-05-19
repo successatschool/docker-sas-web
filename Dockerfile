@@ -25,7 +25,10 @@ RUN a2enmod headers \
 # Extension config and install
 RUN docker-php-ext-configure gd --with-jpeg
 RUN docker-php-ext-install bcmath gd intl opcache pcntl pdo_mysql sockets
+RUN pecl install memcached && docker-php-ext-enable memcached
 
+# TODO retire memcache extension, once we've replaced the bundle using it with native
+# Symfony 3.4 sessions in Production.
 # Manual build needed to get memcache extension support on PHP 7.x
 # See https://stackoverflow.com/a/48380759/2803757 and https://github.com/LeaseWeb/LswMemcacheBundle#requirements
 RUN cd /usr/local/src/ \
