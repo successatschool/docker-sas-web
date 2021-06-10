@@ -1,7 +1,7 @@
 FROM php:7.4-apache
 
 # System packages inc. Node + npm
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
 # Deps include some needed for post-npm-install scripts, e.g. imagemin Webpack plugin's gifsicle install.
 RUN apt-get update -qq  \
