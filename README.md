@@ -10,8 +10,13 @@ To test locally before pushing:
 
 Remember to point your local config to the `:tmp-local` tag while testing.
 
-## Generate new automatic Docker Hub build
+## CI builds
 
-* Push to `main`, unless planning to use a new tag.
-* The [Docker Hub repository](https://cloud.docker.com/u/successatschool/repository/docker/successatschool/docker-sas-web/general)
-has an automated build from master on GitHub. Current tag is **successatschool/docker-sas-web:php7.4**.
+We use GitHub Actions to build and push [to Docker Hub](https://cloud.docker.com/u/successatschool/repository/docker/successatschool/docker-sas-web/general)
+daily and on changes on the `main` branch.
+
+The current tag is **successatschool/docker-sas-web:php7.4**.
+
+See [the docs](https://github.com/marketplace/actions/build-and-push-docker-images?version=v2.7.0)
+for more on how and why CI and Dependabot are configured within `.github`.
+
