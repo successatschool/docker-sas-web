@@ -14,6 +14,8 @@ COPY config/ssl-local.conf /etc/apache2/sites-available/
 
 RUN a2enmod headers \
  && a2enmod proxy \
+ && a2enmod proxy_balancer \
+ && a2enmod proxy_http \
  && a2enmod remoteip \
  && a2enmod rewrite \
  && a2enmod ssl \
