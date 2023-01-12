@@ -1,4 +1,4 @@
-FROM php:7.4-apache
+FROM php:8.2-apache
 
 # System packages inc. Node + npm
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
@@ -26,22 +26,7 @@ RUN a2enmod headers \
 # Extension config and install
 RUN docker-php-ext-configure gd --with-jpeg
 RUN docker-php-ext-install bcmath gd intl opcache pcntl pdo_mysql sockets
-RUN pecl install memcached && docker-php-ext-enable memcached
-
-# TODO retire memcache extension, once we've replaced the bundle using it with native
-# Symfony 3.4 sessions in Production.
-# Manual build needed to get memcache extension support on PHP 7.x
-# See https://stackoverflow.com/a/48380759/2803757 and https://github.com/LeaseWeb/LswMemcacheBundle#requirements
-RUN cd /usr/local/src/ \
- && wget https://github.com/remicollet/pecl-memcache/archive/issue-php73.zip \
- && unzip issue-php73.zip \
- && mv pecl-memcache-issue-php73 pecl-memcache-php7 \
- && cd pecl-memcache-php7 \
- && phpize \
- && ./configure --enable-memcache \
- && make \
- && cp modules/memcache.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902 \
- && echo 'extension=memcache.so' > /usr/local/etc/php/conf.d/docker-php-ext-manual-memcache.ini
+RUN pecl install memcache memcached && docker-php-ext-enable memcache memcached
 
 # PHP configuration
 COPY config/php.ini /usr/local/etc/php/
