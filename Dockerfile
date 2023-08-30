@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.2-apache-a
 
 COPY --from=node:18-alpine /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=node:18-alpine /usr/local/bin/node /usr/local/bin/node
