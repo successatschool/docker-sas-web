@@ -5,7 +5,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 
 # Deps include some needed for post-npm-install scripts, e.g. imagemin Webpack plugin's gifsicle install.
 RUN apt-get update -qq  \
- && apt-get install -y acl build-essential cmake curl git git-core gnupg2 libicu-dev libjpeg62-turbo-dev libmemcached-dev libmemcached11 libmemcachedutil2 libpng-dev libz-dev nodejs ssh vim-tiny wget unzip \
+ && apt-get install -y acl build-essential cmake curl git git-core gnupg2 libicu-dev libjpeg62-turbo-dev libmemcached-dev libmemcached11 libmemcachedutil2 zlib1g-dev libssl-dev libpng-dev libz-dev nodejs ssh vim-tiny wget unzip \
  && rm -rf /var/lib/apt/lists/* /var/cache/apk/*
 
 # Apache configuration

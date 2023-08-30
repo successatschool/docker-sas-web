@@ -20,7 +20,7 @@ The repository must have a change pushed or the scheduled action enabled
 at least every 60 days for updates to continue being built and pushed. We might
 want to consider migrating this process to CircleCI to remove this requirement.
 
-The current tag is **successatschool/docker-sas-web:php8.2**.
+The current tag is **successatschool/docker-sas-web:php8.2-staging**.
 
 See [the docs](https://github.com/marketplace/actions/build-and-push-docker-images?version=v2.7.0)
 for more on how and why CI and Dependabot are configured within `.github`.
