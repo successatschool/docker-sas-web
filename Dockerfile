@@ -1,7 +1,7 @@
-FROM php:8.2-apache
+FROM php:8.4-apache
 
-COPY --from=node:18-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --from=node:18-slim /usr/local/bin/node /usr/local/bin/node
+COPY --from=node:24-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node:24-slim /usr/local/bin/node /usr/local/bin/node
 RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 # Deps include some needed for post-npm-install scripts, e.g. imagemin Webpack plugin's gifsicle install.
