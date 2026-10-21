@@ -1,4 +1,4 @@
-name: Build and push to Docker Hub as successatschool/docker-sas-web:php8.2
+name: Build and push to Docker Hub as successatschool/docker-sas-web:php8.4
 
 on:
   push:
@@ -30,4 +30,4 @@ jobs:
         with:
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: successatschool/docker-sas-web:php8.2
+          tags: successatschool/docker-sas-web:php8.4
