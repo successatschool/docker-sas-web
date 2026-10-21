@@ -32,5 +32,7 @@ RUN pecl install memcache memcached && docker-php-ext-enable memcache memcached
 # PHP configuration
 COPY config/php.ini /usr/local/etc/php/
 
+RUN php -v && node -v
+
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
