@@ -27,7 +27,7 @@ RUN a2enmod headers \
 # Extension config and install
 RUN docker-php-ext-configure gd --with-jpeg
 RUN docker-php-ext-install bcmath gd intl opcache pcntl pdo_mysql sockets
-RUN pecl install memcache memcached && docker-php-ext-enable memcache memcached
+RUN pecl install memcache memcached-3.4.0 && docker-php-ext-enable memcache memcached
 
 # PHP configuration
 COPY config/php.ini /usr/local/etc/php/
